@@ -1,32 +1,39 @@
-# React + TypeScript + Vite
+# MAX Chat via GREEN-API
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Minimal React SPA for sending and receiving text messages in MAX through
+[GREEN-API](https://green-api.com/max). Built as a test task for the
+Frontend Developer React position.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Open the printed local URL, enter your GREEN-API `idInstance` and
+`apiTokenInstance`, then start a chat by phone number.
+
+## Tests
+
+```bash
+npm test              # unit + component tests (Vitest)
+npx playwright install --with-deps chromium
+npm run test:e2e      # end-to-end (Playwright, GREEN-API mocked)
+```
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## How it works
+
+- Sending: `POST /waInstance{id}/sendMessage/{token}`.
+- Receiving: polls `GET /waInstance{id}/receiveNotification/{token}` every
+  3s, then deletes the processed notification via
+  `DELETE /waInstance{id}/deleteNotification/{token}/{receiptId}`.
+- Credentials live in `sessionStorage`; chat history in `localStorage`
+  (both client-side only — no backend).
