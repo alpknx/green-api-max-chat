@@ -25,7 +25,12 @@ function buildUrl(
   return `${BASE_URL}/waInstance${creds.idInstance}/${method}/${creds.apiTokenInstance}${extraPath}`
 }
 
-export class GreenApiError extends Error {}
+export class GreenApiError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'GreenApiError'
+  }
+}
 
 export async function getSettings(
   creds: GreenApiCredentials
