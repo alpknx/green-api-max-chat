@@ -6,7 +6,7 @@ Frontend Developer React position.
 
 ## Live demo
 
-https://green-api-max-chat.vercel.app
+https://warm-puzzling-lecun.vercel.app
 
 ## Run locally
 
