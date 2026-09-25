@@ -4,6 +4,10 @@ Minimal React SPA for sending and receiving text messages in MAX through
 [GREEN-API](https://green-api.com/max). Built as a test task for the
 Frontend Developer React position.
 
+## Live demo
+
+https://green-api-max-chat.vercel.app
+
 ## Run locally
 
 ```bash
